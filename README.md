@@ -1,6 +1,12 @@
 # PETLAR_RECO
 This code is intented to simulate the reconstruction process for the PETLAr experiment.
 
+# Dependencies
+numpy
+matplotlib
+sklearn
+PIL
+
 ## What it does
 In PET scans, two back to back photons are detected with a cylindrical detector.
 A line is then drawn between the two of detected photons.
