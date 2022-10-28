@@ -20,7 +20,9 @@ from mpl_toolkits.axes_grid1 import AxesGrid
 import matplotlib as m
 import to_stl
 import sys
+import time
 
+start = time.time()
 #   Allows you to use code from the "LOR" directory
 #   That code will create the "Lines of Response" produced by PET data
 sys.path.insert(0, './../LOR')
@@ -29,8 +31,8 @@ sys.path.insert(0, './../LOR')
 import LOR
 
 #   Generates N lines of response 
-N = 100
-LOR_data = LOR.Generate_LOR(N)
+N = 50
+LOR_data = LOR.Generate_LOR(N,False,False,"r")
 
 #   Defines the number of pixels in the geometry 
 #   I still need to verify this is the right number of pixels
@@ -80,7 +82,7 @@ R = 20
 
 
 #   Uses the LOR raw data to generate a sinogram
-for i in range(N):
+for i in range(len(LOR_data[0])):
     line_xy = find_line(LOR_data[0][i],LOR_data[1][i])
     data_xy += [convert(line_xy[0],line_xy[1],0,0,0)]
     x_xy += [data_xy[i][0]]
@@ -120,6 +122,9 @@ ax3.set_xlabel("XZ Plane")
 
 ax2.set_title("Sinogram Projections onto Planes")
 
+end = time.time()
+print("This simulation took: ", end - start, "s")
+print("This simulation used: ", len(LOR_data[0]), "events")
 
 ####################
 ##                ##
